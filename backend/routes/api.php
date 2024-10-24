@@ -16,3 +16,4 @@ use App\Http\Controllers\PollController;
 */
 
 Route::apiResource('polls', PollController::class);
+Route::post('/polls/{id}/vote', [PollController::class, 'vote']);

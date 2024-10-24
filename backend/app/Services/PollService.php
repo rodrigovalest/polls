@@ -5,6 +5,9 @@ namespace App\Services;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Poll;
 use App\Services\PollOptionService;
+use App\Exceptions\PollExpiredException;
+use App\Exceptions\PollOptionNotFoundException;
+use App\Exceptions\PollOptionsLimitException;
 
 class PollService
 {
@@ -14,6 +17,9 @@ class PollService
 
     public function create($title, $startDate, $endDate, array $pollOptions): void
     {
+        if (count($pollOptions) < 3)
+            throw new PollOptionsLimitException('A poll must have a minimum of 3 options.', 422);
+
         $poll = Poll::create([
             'title' => $title,
             'start_date' => $startDate,
@@ -54,7 +60,19 @@ class PollService
         $poll->delete();
     }
 
-    public function vote($pollId, $optionId): void
+    public function vote($id, $option): void
     {
+        $poll = Poll::with('options')->findOrFail($id);
+
+        $now = now();
+        if ($now->lessThan($poll->start_date) || $now->greaterThan($poll->end_date))
+            throw new PollExpiredException('The poll is not active. Voting is not allowed.', 403);
+
+        $pollOption = $poll->options()->where('description', $option)->first();
+
+        if (!$pollOption)
+            throw new PollOptionNotFoundException('Poll option was not found.', 404);
+
+        $pollOption->increment('vote_count');
     }
 }

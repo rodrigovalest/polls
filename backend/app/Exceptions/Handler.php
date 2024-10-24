@@ -48,7 +48,31 @@ class Handler extends ExceptionHandler
                 'errors' => [
                     'message' => $e->getMessage(),
                 ]
-            ], 400);
+            ], 422);
+        });
+
+        $this->renderable(function (PollExpiredException $e) {
+            return new JsonResponse([
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], $e->getCode());
+        });
+
+        $this->renderable(function (PollOptionNotFoundException $e) {
+            return new JsonResponse([
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], $e->getCode());
+        });
+
+        $this->renderable(function (PollOptionsLimitException $e) {
+            return new JsonResponse([
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], $e->getCode());
         });
     }
 }

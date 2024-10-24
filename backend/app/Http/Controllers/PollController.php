@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\PollService;
 use App\Http\Requests\PollRequest;
+use App\Http\Requests\VoteRequest;
 use App\Http\Resources\PollResource;
 use Illuminate\Http\JsonResponse;
 
@@ -68,5 +69,17 @@ class PollController extends Controller
         return response()->json([
             'message' => 'Poll deleted successfully'
         ], 204);
+    }
+
+    public function vote(VoteRequest $request, $id): JsonResponse
+    {
+        $this->pollService->vote(
+            $id,
+            $request->validated('option'),
+        );
+
+        return response()->json([
+            'message' => 'Vote registered successfully'
+        ], 200);
     }
 }
