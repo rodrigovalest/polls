@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -21,9 +23,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, class-string<\Throwable>>
      */
-    protected $dontReport = [
-        //
-    ];
+    protected $dontReport = [];
 
     /**
      * A list of the inputs that are never flashed to the session on validation exceptions.
@@ -43,8 +43,36 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (ValidationException $e) {
+            return new JsonResponse([
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], 422);
+        });
+
+        $this->renderable(function (PollExpiredException $e) {
+            return new JsonResponse([
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], $e->getCode());
+        });
+
+        $this->renderable(function (PollOptionNotFoundException $e) {
+            return new JsonResponse([
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], $e->getCode());
+        });
+
+        $this->renderable(function (PollOptionsLimitException $e) {
+            return new JsonResponse([
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], $e->getCode());
         });
     }
 }
