@@ -4,26 +4,37 @@ namespace App\Services;
 
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Poll;
+use App\Services\PollOptionService;
 
 class PollService
 {
-    public function create($title, $startDate, $endDate): Poll
+    public function __construct(
+        protected PollOptionService $pollOptionService
+    ) {}
+
+    public function create($title, $startDate, $endDate, array $pollOptions): void
     {
-        return Poll::create([
+        $poll = Poll::create([
             'title' => $title,
             'start_date' => $startDate,
             'end_date' => $endDate,
         ]);
+
+        foreach ($pollOptions as $option) {
+            $poll->options()->create([
+                'description' => $option['description'],
+            ]);
+        }
     }
 
     public function findAll(): Collection
     {
-        return Poll::all();
+        return Poll::with('options')->get();
     }
 
     public function findById($id): Poll
     {
-        return Poll::findOrFail($id);
+        return Poll::with('options')->findOrFail($id);
     }
 
     public function update($id, $newTitle, $newStartDate, $newEndDate): void

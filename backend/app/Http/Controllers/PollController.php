@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\TempException;
 use App\Services\PollService;
 use App\Http\Requests\PollRequest;
+use App\Http\Resources\PollResource;
 use Illuminate\Http\JsonResponse;
 
 class PollController extends Controller
@@ -13,27 +13,27 @@ class PollController extends Controller
         protected PollService $pollService,
     ) {}
 
-    public function index(): JsonResponse
+    public function index()
     {
         $polls = $this->pollService->findAll();
 
         return response()->json([
             'message' => 'All polls fetched successfully',
-            'data' => $polls
+            'data' => PollResource::collection($polls)
         ], 200);
     }
 
     public function store(PollRequest $request): JsonResponse
     {
-        $poll = $this->pollService->create(
+        $this->pollService->create(
             $request->validated('title'),
             $request->validated('start_date'),
             $request->validated('end_date'),
+            $request->validated('options')
         );
 
         return response()->json([
             'message' => 'Poll created successfully',
-            'data' => $poll
         ], 201);
     }
 
@@ -43,17 +43,17 @@ class PollController extends Controller
 
         return response()->json([
             'message' => 'Poll found successfully',
-            'data' => $poll
+            'data' => new PollResource($poll)
         ], 200);
     }
 
     public function update(PollRequest $request, $id): JsonResponse
     {
-        $poll = $this->pollService->update(
+        $this->pollService->update(
             $id,
             $request->validated('title'),
             $request->validated('start_date'),
-            $request->validated('end_date')
+            $request->validated('end_date'),
         );
 
         return response()->json([

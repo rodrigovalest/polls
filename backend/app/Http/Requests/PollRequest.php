@@ -16,7 +16,9 @@ class PollRequest extends FormRequest
         return [
             'title' => 'sometimes|required|string|max:255',
             'start_date' => 'sometimes|required|date',
-            'end_date' => 'sometimes|required|date|after:start_date'
+            'end_date' => 'sometimes|required|date|after:start_date',
+            'options' => 'required|array',
+            'options.*.description' => 'required|string|max:255',
         ];
     }
 }
