@@ -3,11 +3,10 @@
 import Button from "@/components/Button";
 import StatusIcon from "@/components/StatusIcon";
 import Title from "@/components/Title";
-import { environment } from "@/environment/environment";
-import { IPoll } from "@/models/entities/IPoll";
+import { usePollData } from "@/hooks/usePollData";
+import { usePollVoteMutate } from "@/hooks/usePollVoteMutate";
+import { IVoteRequest } from "@/models/request/IVoteRequest";
 import { isActive } from "@/services/DateService";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 interface IPollProps {
@@ -18,37 +17,23 @@ export default function Poll({
   params 
 }: IPollProps) {
   const router = useRouter();
-  const { data, isLoading, error } = useQuery<IPoll>({
-    queryKey: ['poll', params.id],
-    queryFn: async () => {
-      try {
-        const response = await axios.get(`${environment.httpApiUrl}/api/polls/${params.id}`);
-        console.log("start date", response.data.data.start_date);
-        console.log("end date", response.data.data.end_date);
-        return response.data.data;
-      } catch (err) {
-        if (err.response && err.response.status === 404)
-          router.push('/not-found');
-        throw err;
-      }
-    },
-  });
+  const { data, isLoading, error } = usePollData(params.id);
+  const { mutate } = usePollVoteMutate();
 
   function goToHomepage() {
     router.push('/');
   }
 
-  function doVote() {
-
+  function doVote(optionId: number) {
+    const data: IVoteRequest = { option_id: optionId };
+    mutate({ pollId: params.id, voteData: data });
   }
 
-  function calculatePercentage(): number {
-    return 1;
-  }
+  if (isLoading) 
+    return <p className="font-MonaSans text-lg font-medium">Loading...</p>;
 
-  if (isLoading) return <p>Loading...</p>;
-  
-  if (error) return <p>Error loading data</p>;
+  if (error) 
+    return <p className="font-MonaSans text-lg font-medium">Error loading data</p>;
 
   return (
     <div className="w-11/12 xl:w-2/3 2xl:w-1/2">
@@ -75,7 +60,7 @@ export default function Poll({
                 </p>
               </div>
               
-              <Button text="Vote" onClick={doVote} isActive={isActive(data.start_date, data.end_date)} />
+              <Button text="Vote" onClick={() => doVote(option.id)} isActive={isActive(data.start_date, data.end_date)} />
             </div>
           </div>
         ))}

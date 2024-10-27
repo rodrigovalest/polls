@@ -1,5 +1,5 @@
 export interface IOption {
-  id?: number;
+  id: number;
   description: string;
   vote_count: number;
 }
