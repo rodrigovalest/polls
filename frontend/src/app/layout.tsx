@@ -1,4 +1,9 @@
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
+
+const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -6,10 +11,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="w-full h-full">
-      <body className="p-20 w-full h-full flex justify-center items-center bg-background">
-        {children}
-      </body>
-    </html>
+    <QueryClientProvider client={queryClient}>
+      <html lang="en" className="w-full h-full">
+        <body className="p-20 w-full h-full flex justify-center items-center bg-background">
+          {children}
+        </body>
+      </html>
+    </QueryClientProvider>
   );
 }

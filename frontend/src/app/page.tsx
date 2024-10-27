@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
-import PollCardPreview from "@/components/PollCardPreview";
 import Title from "@/components/Title";
+import PollCardPreview from "@/components/PollCardPreview";
 
 export default function Home() {
   const router = useRouter();
@@ -28,8 +28,8 @@ export default function Home() {
             <PollCardPreview
               id={1}
               title="adssdadasaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              startDate="asdasddsa"
-              endDate="adsasddsa"
+              startDate="2024-10-20 18:00:00"
+              endDate="2024-10-20 20:00:00"
             />
           </div>
           
@@ -37,8 +37,8 @@ export default function Home() {
             <PollCardPreview
               id={1}
               title="adssdadasaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              startDate="asdasddsa"
-              endDate="adsasddsa"
+              startDate="2024-10-20 18:00:00"
+              endDate="2025-10-20 18:00:00"
             />
           </div>
 
@@ -46,8 +46,8 @@ export default function Home() {
             <PollCardPreview
               id={1}
               title="adssdadasaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              startDate="asdasddsa"
-              endDate="adsasddsa"
+              startDate="2024-10-20 18:00:00"
+              endDate="2025-10-20 18:00:00"
             />
           </div>
 
@@ -55,8 +55,8 @@ export default function Home() {
             <PollCardPreview
               id={1}
               title="adssdadasaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              startDate="asdasddsa"
-              endDate="adsasddsa"
+              startDate="2024-10-20 18:00:00"
+              endDate="2025-10-20 18:00:00"
             />
           </div>
 
@@ -64,8 +64,8 @@ export default function Home() {
             <PollCardPreview
               id={1}
               title="adssdadasaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              startDate="asdasddsa"
-              endDate="adsasddsa"
+              startDate="2024-12-20 18:00:00"
+              endDate="2024-12-22 18:00:00"
             />
           </div>
 
@@ -73,8 +73,8 @@ export default function Home() {
             <PollCardPreview
               id={1}
               title="adssdadasaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              startDate="asdasddsa"
-              endDate="adsasddsa"
+              startDate="2024-10-20 18:00:00"
+              endDate="2025-10-20 18:00:00"
             />
           </div>
         </div>

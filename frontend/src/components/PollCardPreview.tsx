@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Button from "./Button";
+import StatusIcon from "./StatusIcon";
 
 interface IPollCardPreviewProps {
   id: number;
@@ -18,14 +19,6 @@ export default function PollCardPreview({
 }: IPollCardPreviewProps) {
   const router = useRouter();
 
-  function isActive(): boolean {
-    const now = new Date();
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    return now >= start && now <= end;
-  }
-
   function onSeePoll(): void {
     router.push(`/poll/${id}`);
   }
@@ -39,9 +32,7 @@ export default function PollCardPreview({
           {truncatedTitle}
         </p>
 
-        <span className={`py-[5px] px-6 rounded-full border-2 ${isActive() ? 'text-appGreen border-appGreen' : 'text-appRed border-appRed'}`}>
-          {isActive() ? 'Active' : 'Inactive'}
-        </span>
+        <StatusIcon startDate={startDate} endDate={endDate} />
       </div>
 
       <div className="px-5 py-5">
