@@ -1,8 +1,10 @@
 "use client";
 
 import Button from "@/components/Button";
+import Loading from "@/components/Loading";
 import StatusIcon from "@/components/StatusIcon";
 import Title from "@/components/Title";
+import { useDeletePollMutate } from "@/hooks/useDeletePollMutate";
 import { usePollData } from "@/hooks/usePollData";
 import { usePollVoteMutate } from "@/hooks/usePollVoteMutate";
 import { IVoteRequest } from "@/models/request/IVoteRequest";
@@ -20,27 +22,44 @@ export default function Poll({
   const router = useRouter();
   const [ hasVoted, setHasVoted ] = useState<boolean>(false);
   const { data, isLoading, error } = usePollData(params.id, 1000);
-  const { mutate } = usePollVoteMutate();
+  const { pollVoteMutate } = usePollVoteMutate();
+  const { deletePollMutate } = useDeletePollMutate();
 
   function goToHomepage() {
-    router.push('/');
+    router.push("/");
   }
 
   function doVote(optionId: number) {
     const data: IVoteRequest = { option_id: optionId };
-    mutate(
+    pollVoteMutate.mutate(
       { pollId: params.id, voteData: data },
       {
         onSuccess: () => setHasVoted(true),
-        onError: () => alert("Erro ao registrar o voto. Tente novamente.")
+        onError: () => alert("Error registering vote. Try again.")
       }
     );
   }
 
-  if (isLoading) 
-    return <p className="font-MonaSans text-lg font-medium">Loading...</p>;
+  function updatePoll() {
+    router.push(`${params.id}/update`);
+  }
 
-  if (error) 
+  function deletePoll() {
+    if (!confirm("Are you sure you want to delete this poll?"))
+      return;
+
+    deletePollMutate.mutate(
+      params.id, 
+      {
+        onSuccess: () => router.push("/"),
+        onError: () => alert("Error deleting poll. Please try again.")
+      })
+  }
+
+  if (isLoading) 
+    return <Loading />
+
+  if (error)
     return <p className="font-MonaSans text-lg font-medium">Error loading data</p>;
 
   return (
@@ -52,7 +71,17 @@ export default function Poll({
       </div>
 
       <div className="mb-8">
-        <Button text="Homepage" onClick={goToHomepage} />
+        <div className="inline-block mr-1">
+          <Button text="Homepage" onClick={goToHomepage} />
+        </div>
+        
+        <div className="inline-block mr-1">
+          <Button text="Update poll" onClick={updatePoll} />
+        </div>
+        
+        <div className="inline-block">
+          <Button text="Delete poll" onClick={deletePoll} />
+        </div>
       </div>
 
       <div className="bg-appWhite border rounded-2xl shadow-md w-full py-6">
@@ -68,7 +97,7 @@ export default function Poll({
                 </p>
               </div>
               
-              <Button 
+              <Button
                 text="Vote" 
                 onClick={() => doVote(option.id)} isActive={isActive(data.start_date, data.end_date)}
                 isActive={!hasVoted}  
