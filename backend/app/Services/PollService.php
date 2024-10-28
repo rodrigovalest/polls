@@ -43,15 +43,23 @@ class PollService
         return Poll::with('options')->findOrFail($id);
     }
 
-    public function update($id, $newTitle, $newStartDate, $newEndDate): void
+    public function update($id, $newTitle, $newStartDate, $newEndDate, $newOptions): void
     {
         $poll = Poll::findOrFail($id);
 
         $poll->update([
             'title' => $newTitle,
             'start_date' => $newStartDate,
-            'end_date' => $newEndDate
+            'end_date' => $newEndDate,
         ]);
+
+        $poll->options()->delete();
+
+        foreach ($newOptions as $option) {
+            $poll->options()->create([
+                'description' => $option['description'],
+            ]);
+        }
     }
 
     public function deleteById($id): void

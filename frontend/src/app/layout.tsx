@@ -12,7 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <QueryClientProvider client={queryClient}>
-      <html lang="en" className="w-full">
+      <html lang="en" className="w-full h-fit">
         <body className="p-20 w-full h-full flex justify-center items-center bg-background">
           {children}
         </body>

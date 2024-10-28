@@ -55,6 +55,7 @@ class PollController extends Controller
             $request->validated('title'),
             $request->validated('start_date'),
             $request->validated('end_date'),
+            $request->validated('options')
         );
 
         return response()->json([

@@ -26,7 +26,7 @@ export default function PollCardPreview({
   const truncatedTitle = title.length > 100 ? `${title.slice(0, 100)}...` : title;
 
   return (
-    <div className="inline-block bg-appWhite border rounded-2xl shadow-md w-[500px]">
+    <div className="inline-block bg-appWhite border rounded-2xl shadow-md w-full">
       <div className="flex justify-between items-center border-b-appGray border-b-2 px-5 py-4">
         <p className="font-MonaSans font-bold text-xl text-appBlack">
           {truncatedTitle}

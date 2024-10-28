@@ -8,9 +8,9 @@ const postData = async ({ pollId, voteData }: { pollId: string | number; voteDat
 }
 
 export function usePollVoteMutate() {
-  const mutate = useMutation({
+  const pollVoteMutate = useMutation({
     mutationFn: postData
   });
 
-  return mutate;
+  return { pollVoteMutate };
 }

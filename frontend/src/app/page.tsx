@@ -6,6 +6,7 @@ import Title from "@/components/Title";
 import PollCardPreview from "@/components/PollCardPreview";
 import { useAllPollsData } from "@/hooks/useAllPollsData";
 import { IPoll } from "@/models/entities/IPoll";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Home() {
   }
 
   if (isLoading) 
-    return <p className="font-MonaSans text-lg font-medium">Loading...</p>;
+    return <Loading />;
 
   if (error) 
     return <p className="font-MonaSans text-lg font-medium">Error loading data</p>;
@@ -32,7 +33,7 @@ export default function Home() {
           <Button text="New poll" onClick={onNewPoll} />
         </div>
 
-        <div className="flex flex-wrap">
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           {data?.map((poll: IPoll) => (
             <div className="mr-4 mb-3" key={poll.id}>
               <PollCardPreview
