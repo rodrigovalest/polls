@@ -6,6 +6,20 @@ export function isActive(startDate: string, endDate: string): boolean {
   return now >= start && now <= end;
 }
 
+export function getPollStatus(startDate: string, endDate: string): 'NOT_STARTED' | 'ACTIVE' | 'COMPLETED' {
+  const now = new Date();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (now >= start && now <= end)
+    return 'ACTIVE';
+
+  if (now < start)
+    return 'NOT_STARTED';
+
+  return 'COMPLETED'
+}
+
 export function formatDateToMySQL(date: Date): string {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
