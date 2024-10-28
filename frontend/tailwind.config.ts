@@ -17,7 +17,8 @@ const config: Config = {
         appRed: "#D72F2F",
         appGreen: "#2FD77B",
         appWhite: "#FDFDFD",
-        appGray: "#C2C2C2"
+        appGray: "#C2C2C2",
+        appLightGray: "#F2F2F2"
       },
     },
   },

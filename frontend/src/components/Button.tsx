@@ -9,8 +9,6 @@ export default function Button({
   isActive,
   onClick 
 }: IButtonProps) {
-  console.log(isActive)
-  
   if (isActive === false) {
     return (
       <button 
