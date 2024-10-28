@@ -31,8 +31,8 @@ class PollSeeder extends Seeder
         Poll::create([
             'id' => 3,
             'title' => 'Qual é a sua estação do ano favorita?',
-            'start_date' => '2024-10-20 18:00:00',
-            'end_date' => '2024-12-25 18:00:00',
+            'start_date' => '2026-10-20 18:00:00',
+            'end_date' => '2026-12-25 18:00:00',
         ]);
 
         Poll::create([
