@@ -60,7 +60,7 @@ class PollService
         $poll->delete();
     }
 
-    public function vote($id, $option): void
+    public function vote($id, $optionId): void
     {
         $poll = Poll::with('options')->findOrFail($id);
 
@@ -68,7 +68,7 @@ class PollService
         if ($now->lessThan($poll->start_date) || $now->greaterThan($poll->end_date))
             throw new PollExpiredException('The poll is not active. Voting is not allowed.', 403);
 
-        $pollOption = $poll->options()->where('description', $option)->first();
+        $pollOption = $poll->options()->where('id', $optionId)->first();
 
         if (!$pollOption)
             throw new PollOptionNotFoundException('Poll option was not found.', 404);

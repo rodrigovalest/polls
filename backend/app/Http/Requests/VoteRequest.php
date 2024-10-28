@@ -14,7 +14,7 @@ class VoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'option' => 'required|string|max:255',
+            'option_id' => 'required|integer',
         ];
     }
 }

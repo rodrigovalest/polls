@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'MonaSansExpanded';
+  src: url('../assets/fonts/mona_sans/MonaSans-Black.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansExpanded';
+  src: url('../assets/fonts/mona_sans/MonaSansExpanded-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansExpanded';
+  src: url('../assets/fonts/mona_sans/MonaSansExpanded-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansExpanded';
+  src: url('../assets/fonts/mona_sans/MonaSansExpanded-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansExpanded';
+  src: url('../assets/fonts/mona_sans/MonaSansExpanded-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansExpanded';
+  src: url('../assets/fonts/mona_sans/MonaSansExpanded-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSans';
+  src: url('../assets/fonts/mona_sans/MonaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSans';
+  src: url('../assets/fonts/mona_sans/MonaSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSans';
+  src: url('../assets/fonts/mona_sans/MonaSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSans';
+  src: url('../assets/fonts/mona_sans/MonaSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSans';
+  src: url('../assets/fonts/mona_sans/MonaSans-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSans';
+  src: url('../assets/fonts/mona_sans/MonaSans-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansCondensed';
+  src: url('../assets/fonts/mona_sans/MonaSansCondensed-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansCondensed';
+  src: url('../assets/fonts/mona_sans/MonaSansCondensed-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansCondensed';
+  src: url('../assets/fonts/mona_sans/MonaSansCondensed-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansCondensed';
+  src: url('../assets/fonts/mona_sans/MonaSansCondensed-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansCondensed';
+  src: url('../assets/fonts/mona_sans/MonaSansCondensed-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonaSansCondensed';
+  src: url('../assets/fonts/mona_sans/MonaSansCondensed-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+

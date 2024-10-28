@@ -75,7 +75,7 @@ class PollController extends Controller
     {
         $this->pollService->vote(
             $id,
-            $request->validated('option'),
+            $request->validated('option_id'),
         );
 
         return response()->json([
