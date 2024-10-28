@@ -32,7 +32,7 @@ export default function Home() {
           <Button text="New poll" onClick={onNewPoll} />
         </div>
 
-        <div className="flex flex-wrap">
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           {data?.map((poll: IPoll) => (
             <div className="mr-4 mb-3" key={poll.id}>
               <PollCardPreview
