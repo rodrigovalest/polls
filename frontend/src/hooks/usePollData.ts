@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export function usePollData(pollId: string | number) {
+export function usePollData(pollId: string | number, refetchInterval: number = 0) {
   const router = useRouter();
   
   return useQuery<IPoll>({
@@ -19,6 +19,6 @@ export function usePollData(pollId: string | number) {
         throw err;
       }
     },
-    // refetchInterval: 1
+    refetchInterval: refetchInterval
   });
 }

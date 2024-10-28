@@ -17,7 +17,7 @@ export default function Poll({
   params 
 }: IPollProps) {
   const router = useRouter();
-  const { data, isLoading, error } = usePollData(params.id);
+  const { data, isLoading, error } = usePollData(params.id, 1000);
   const { mutate } = usePollVoteMutate();
 
   function goToHomepage() {
