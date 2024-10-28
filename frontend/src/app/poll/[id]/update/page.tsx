@@ -12,6 +12,8 @@ import { formatDateToMySQL } from "@/services/DateService";
 import { useUpdatePollMutate } from "@/hooks/useUpdatePollMutate";
 import { usePollData } from "@/hooks/usePollData";
 import Loading from "@/components/Loading";
+import { IUpdatePollRequest } from "@/models/request/IUpdatePollRequest";
+import { IOption } from "@/models/entities/IOption";
 
 const createPollSchema = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -44,7 +46,7 @@ export default function UpdatePoll({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ICreatePollRequest>({
+  } = useForm<IUpdatePollRequest>({
     resolver: yupResolver(createPollSchema),
   });
   const { updatePollMutate } = useUpdatePollMutate();
@@ -77,8 +79,11 @@ export default function UpdatePoll({
     setOptions(newOptions);
   }
 
-  function submitForm(data: ICreatePollRequest) {
-    const formattedData: ICreatePollRequest = {
+  function submitForm(data: IUpdatePollRequest) {
+    if (!confirm("Are you sure you want to refresh the poll? Update will erase all votes cast so far."))
+      return;
+
+    const formattedData: IUpdatePollRequest = {
       ...data,
       options: options.map((option) => ({ description: option })),
       start_date: formatDateToMySQL(new Date(data.start_date)),
