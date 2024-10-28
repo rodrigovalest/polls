@@ -8,6 +8,7 @@ import { usePollVoteMutate } from "@/hooks/usePollVoteMutate";
 import { IVoteRequest } from "@/models/request/IVoteRequest";
 import { isActive } from "@/services/DateService";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface IPollProps {
   params: { id: string }
@@ -17,6 +18,7 @@ export default function Poll({
   params 
 }: IPollProps) {
   const router = useRouter();
+  const [ hasVoted, setHasVoted ] = useState<boolean>(false);
   const { data, isLoading, error } = usePollData(params.id, 1000);
   const { mutate } = usePollVoteMutate();
 
@@ -26,7 +28,13 @@ export default function Poll({
 
   function doVote(optionId: number) {
     const data: IVoteRequest = { option_id: optionId };
-    mutate({ pollId: params.id, voteData: data });
+    mutate(
+      { pollId: params.id, voteData: data },
+      {
+        onSuccess: () => setHasVoted(true),
+        onError: () => alert("Erro ao registrar o voto. Tente novamente.")
+      }
+    );
   }
 
   if (isLoading) 
@@ -60,7 +68,11 @@ export default function Poll({
                 </p>
               </div>
               
-              <Button text="Vote" onClick={() => doVote(option.id)} isActive={isActive(data.start_date, data.end_date)} />
+              <Button 
+                text="Vote" 
+                onClick={() => doVote(option.id)} isActive={isActive(data.start_date, data.end_date)}
+                isActive={!hasVoted}  
+              />
             </div>
           </div>
         ))}
