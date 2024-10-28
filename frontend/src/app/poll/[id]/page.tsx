@@ -62,6 +62,9 @@ export default function Poll({
   if (error)
     return <p className="font-MonaSans text-lg font-medium">Error loading data</p>;
 
+  console.log(isActive(data!.start_date, data!.end_date));
+  console.log(hasVoted);
+
   return (
     <div className="w-11/12 xl:w-2/3 2xl:w-1/2">
       <div className="flex justify-between items-center mb-7">
@@ -100,7 +103,7 @@ export default function Poll({
               <Button
                 text="Vote" 
                 onClick={() => doVote(option.id)} isActive={isActive(data.start_date, data.end_date)}
-                isActive={!hasVoted}  
+                isActive={isActive(data!.start_date, data!.end_date) && !hasVoted}  
               />
             </div>
           </div>
