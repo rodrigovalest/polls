@@ -23,7 +23,7 @@ export default function Home() {
     return <p className="font-MonaSans text-lg font-medium">Error loading data</p>;
 
   return (
-    <main className="md:w-4/5 2xl:w-2/3 pt-28">
+    <main className="md:w-4/5 2xl:w-2/3">
       <div>
         <div className="mb-8">
           <Title title="Homepage" />

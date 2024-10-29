@@ -101,7 +101,7 @@ export default function NewPoll() {
             {...register("start_date")}
             className="w-96 p-2 bg-appLightGray rounded-lg"
           />
-          {errors.end_date && <p className="text-red-500">{errors.start_date.message}</p>}
+          {errors.start_date && <p className="text-red-500">{errors.start_date.message}</p>}
         </div>
 
         <div className="px-6 mb-4">
